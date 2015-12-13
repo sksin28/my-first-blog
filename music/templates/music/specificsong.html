@@ -1,0 +1,42 @@
+{% load staticfiles%}
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Song </title>
+</head>
+<body>
+	<script type="text/javascript">
+	function play(x)
+	{
+		var player = document.getElementById('player');
+		var mp3player = document.getElementById('mp3player');
+		mp3player.src = "/static/media/2 States/"+x+".mp3";
+		player.autoplay = "autoplay";
+		player.load();
+		player.play();
+	}
+
+	</script>
+	{% for single in song %}
+    <div id="singlesong">
+        <p>Name: <a href='#' onclick="play('{{ single.songName }}')">{{ single.songName }}</a></p>
+    <p>Artist: {{ single.artist }}</p>
+    <p>Album: {{ single.album }}</p>
+</div>
+<!--
+	<audio controls autoplay>
+	{% with 'media/'|add:single.songName|add:'.mp3' as song_loc %}
+	<source src="{% static song_loc %}" type="audio/mpeg" />
+	{% endwith %}
+Your browser does not support the audio element.
+</audio>
+-->
+	{% endfor %}
+	<audio controls="controls"  id="player">
+	<source src="/static/media/1.mp3" type="audio/mpeg" id="mp3player">
+Your browser does not support the audio element.
+</audio>
+
+</body>
+</html>
+
